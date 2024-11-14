@@ -1,0 +1,31 @@
+﻿﻿
+@model TableModel
+
+@{
+    ViewData["Title"] = "Create table";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="btn-group btn-group-sm" role="group">
+    <input type="submit" form="createForm" value="Create" class="btn btn-outline-dark" />
+    <a class="btn btn-outline-dark" asp-action="Tables" asp-route-name="@Model.DatabaseName">Back</a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTable" id="createForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DatabaseName" value="@Model.DatabaseName" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

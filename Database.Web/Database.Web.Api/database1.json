@@ -1,0 +1,65 @@
+[
+  {
+    "Name": "db",
+    "Tables": [
+      {
+        "Name": "first",
+        "Properties": [
+          {
+            "Name": "first",
+            "DataType": "string"
+          },
+          {
+            "Name": "some-data",
+            "DataType": "string"
+          }
+        ],
+        "Data": [
+          [
+            "string",
+            "string1",
+            "string2",
+            "string3",
+            "string3"
+          ],
+          [
+            "some-data-1",
+            "some-data-2",
+            "some-data-3",
+            "some-data-4",
+            "some-data-5"
+          ]
+        ]
+      },
+      {
+        "Name": "second",
+        "Properties": [
+          {
+            "Name": "second",
+            "DataType": "string"
+          },
+          {
+            "Name": "data-second",
+            "DataType": "string"
+          }
+        ],
+        "Data": [
+          [
+            "string",
+            "string1",
+            "string2",
+            "string3",
+            "string4"
+          ],
+          [
+            "second1",
+            "second2",
+            "second3",
+            "second4",
+            "second5"
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,83 @@
+﻿
+@model JoinTablesModel
+
+@{
+    ViewData["Title"] = "Join Tables";
+    var database = ViewBag.Database as Database.Common.Models.Database;
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="btn-group btn-group-sm" role="group">
+    <input type="submit" form="joinForm" value="Join" class="btn btn-outline-dark" />
+    <a class="btn btn-outline-dark" asp-action="Tables" asp-route-name="@Model.DatabaseName">Back</a>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="JoinTables" id="joinForm" method="post">
+            <input type="hidden" asp-for="DatabaseName" value="@Model.DatabaseName" />
+            
+            <div class="form-group">
+                <label for="FirstTableName" class="form-label">First Table</label>
+                <select asp-for="FirstTableName" class="form-select" onchange="updatePropertiesDropdown(this.value, 'FirstTableParameter')">
+                    <option value="">Select a table</option>
+                    @foreach (var table in database.Tables)
+                    {
+                        <option value="@table.Name">@table.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="FirstTableParameter" class="form-label">Parameter from First Table</label>
+                <select asp-for="FirstTableParameter" id="FirstTableParameter" class="form-select">
+                    <option value="">Select a parameter</option>
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="SecondTableName" class="form-label">Second Table</label>
+                <select asp-for="SecondTableName" class="form-select" onchange="updatePropertiesDropdown(this.value, 'SecondTableParameter')">
+                    <option value="">Select a table</option>
+                    @foreach (var table in database.Tables)
+                    {
+                        <option value="@table.Name">@table.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="SecondTableParameter" class="form-label">Parameter from Second Table</label>
+                <select asp-for="SecondTableParameter" id="SecondTableParameter" class="form-select">
+                    <option value="">Select a parameter</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updatePropertiesDropdown(tableName, parameterDropdownId) {
+        var properties = [];
+    @foreach (var table in database.Tables)
+    {
+        <text>
+                    if (tableName === "@table.Name") {
+                        properties = @Html.Raw(Json.Serialize(table.Properties.Select(p => p.Name)));
+                        }
+        </text>
+    }
+
+        var dropdown = document.getElementById(parameterDropdownId);
+        dropdown.innerHTML = '<option value="">Select a parameter</option>';
+
+        properties.forEach(function (property) {
+            var option = document.createElement("option");
+            option.value = property;
+            option.text = property;
+            dropdown.add(option);
+        });
+    }
+</script>

@@ -1,0 +1,35 @@
+{
+  "executable": "Database.Web.MVC",
+  "splashscreen": {
+    "imageFile": ""
+  },
+  "name": "Database.Web.MVC",
+  "author": "",
+  "singleInstance": false,
+  "environment": "Production",
+  "build": {
+    "appId": "com.Database.Web.MVC.app",
+    "productName": "Database.Web.MVC",
+    "copyright": "Copyright © 2020",
+    "buildVersion": "1.0.0",
+    "compression": "maximum",
+    "directories": {
+      "output": "../../../bin/Desktop"
+    },
+    "extraResources": [
+      {
+        "from": "./bin",
+        "to": "bin",
+        "filter": [ "**/*" ]
+      }
+    ],
+    "files": [
+      {
+        "from": "./ElectronHostHook/node_modules",
+        "to": "ElectronHostHook/node_modules",
+        "filter": [ "**/*" ]
+      },
+      "**/*"
+    ]
+  }
+}

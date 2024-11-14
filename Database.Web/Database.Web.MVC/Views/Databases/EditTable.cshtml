@@ -1,0 +1,42 @@
+﻿﻿
+@model Database.Common.Models.Table
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>Table designer: @ViewData["Title"]</h1>
+<hr />
+<div class="btn-group btn-group-sm" role="group">
+    <a class="btn btn-outline-dark" asp-action="CreateProperty" asp-route-tableName="@Model.Name" asp-route-dbName="@ViewData["DbName"]">Add column</a>
+    <a class="btn btn-outline-dark" asp-action="Tables" asp-route-name="@ViewData["DbName"]">Back</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Properties)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td class="text-end">
+                    <a asp-action="DeleteProperty" asp-route-name="@item.Name" asp-route-tablename="@Model.Name" asp-route-dbname="@ViewData["DbName"]">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,142 @@
+[
+  {
+    "Name": "first_db",
+    "Tables": [
+      {
+        "Name": "first_db_first_table",
+        "Properties": [
+          {
+            "Name": "Name",
+            "Type": 4
+          },
+          {
+            "Name": "Age",
+            "Type": 1
+          },
+          {
+            "Name": "vl_prop",
+            "Type": 6
+          },
+          {
+            "Name": "index",
+            "Type": 5
+          }
+        ],
+        "Data": [
+          [
+            "awdawd"
+          ],
+          [
+            "19"
+          ],
+          [
+            "a|d"
+          ],
+          [
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "first_join",
+    "Tables": [
+      {
+        "Name": "first",
+        "Properties": [
+          {
+            "Name": "Id",
+            "Type": 1
+          },
+          {
+            "Name": "Name",
+            "Type": 4
+          }
+        ],
+        "Data": [
+          [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          [
+            "Vlad",
+            "Sasha",
+            "Taras",
+            "Nikita"
+          ]
+        ]
+      },
+      {
+        "Name": "second",
+        "Properties": [
+          {
+            "Name": "Id",
+            "Type": 1
+          },
+          {
+            "Name": "Name",
+            "Type": 4
+          }
+        ],
+        "Data": [
+          [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          [
+            "Maya",
+            "Kira",
+            "Any",
+            "Kate"
+          ]
+        ]
+      },
+      {
+        "Name": "first joined second",
+        "Properties": [
+          {
+            "Name": "Id",
+            "Type": 1
+          },
+          {
+            "Name": "Name",
+            "Type": 4
+          },
+          {
+            "Name": "Name",
+            "Type": 4
+          }
+        ],
+        "Data": [
+          [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          [
+            "Vlad",
+            "Sasha",
+            "Taras",
+            "Nikita"
+          ],
+          [
+            "Maya",
+            "Kira",
+            "Any",
+            "Kate"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "second_join",
+    "Tables": []
+  }
+]

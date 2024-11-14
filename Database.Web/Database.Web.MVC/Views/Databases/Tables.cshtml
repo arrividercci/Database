@@ -1,0 +1,38 @@
+﻿﻿
+@model Database.Common.Models.Database
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@ViewData["Title"]: Tables</h1>
+<div class="btn-group btn-group-sm" role="group">
+    <a class="btn btn-outline-dark" asp-action="CreateTable" asp-route-dbname="@Model.Name">Add table</a>
+    <a class="btn btn-outline-dark" asp-action="JoinTables" asp-route-name="@Model.Name">Join tables</a>
+    <a class="btn btn-outline-dark" asp-action="Index">Back</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tables)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-end">
+                    <a asp-action="EditTable" asp-route-name="@item.Name" asp-route-dbname="@Model.Name">Table design</a> |
+                    <a asp-action="Fields" asp-route-tablename="@item.Name" asp-route-dbname="@Model.Name">Fields</a> |
+                    <a asp-action="DeleteTable" asp-route-name="@item.Name" asp-route-dbname="@Model.Name">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,35 @@
+﻿﻿
+@model IEnumerable<Database.Common.Models.Database>
+
+@{
+    ViewData["Title"] = "DataBases";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="btn-group btn-group-sm" role="group">
+    <a class="btn btn-outline-dark" asp-action="Create">Create</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-end">
+                    <a asp-action="Tables" asp-route-name="@item.Name">Tables</a> |
+                    <a asp-action="Delete" asp-route-name="@item.Name">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

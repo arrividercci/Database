@@ -1,0 +1,59 @@
+﻿@using Database.Common.Data
+@using Database.Common.Models
+﻿
+@model TableFullModel
+
+@{
+    ViewData["Title"] = ViewBag.Table.Name;
+}
+
+<h1>@ViewData["Title"]: Tables</h1>
+<div class="btn-group btn-group-sm" role="group">
+    <a class="btn btn-outline-dark" asp-action="CreateField" asp-route-tablename="@ViewBag.Table.Name" asp-route-dbname="@ViewData["DbName"]">Add field</a>
+    <a class="btn btn-outline-dark" asp-action="Tables" asp-route-name="@ViewData["DbName"]">Back</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            @foreach(var prop in Model.Columns)
+            {
+                <th>
+                    @prop.Name
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @for (int i = 0; i < ((Model.Values != null && Model.Values.Any()) ? Model.Values.First().Count : 0); i++)
+        {
+            <tr>
+                @{var j = 0;
+                    foreach(var item in Model.Values)
+                    {
+
+                        @if (Model.Columns.ElementAt(j).Type == PropertyType.StringInvl)
+                        {
+                            var splitedMessage = item.ElementAt(i).Split(DatabaseContext.StringinvlSeparator);
+                            <td>
+                                @($"Min: {splitedMessage[0]} Max: {splitedMessage[1]}")
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.ElementAt(i)
+                            </td> 
+                        }
+                        j++;
+                    }
+                }
+                <td class="text-end">
+                    <a asp-action="EditField" asp-route-index="@i" asp-route-tablename="@Model.TableName" asp-route-dbname="@Model.DbName">Edit</a> |
+                    <a asp-action="DeleteField" asp-route-index="@i" asp-route-tablename="@Model.TableName" asp-route-dbname="@Model.DbName">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

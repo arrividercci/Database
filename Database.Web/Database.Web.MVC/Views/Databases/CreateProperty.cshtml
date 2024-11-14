@@ -1,0 +1,37 @@
+﻿@using Database.Common.Models
+﻿
+@model PropertyModel
+
+@{
+    ViewData["Title"] = "Add column";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="btn-group btn-group-sm" role="group">
+    <input type="submit" form="createForm" value="Create" class="btn btn-outline-dark" />
+    <a class="btn btn-outline-dark" asp-action="EditTable" asp-route-name="@Model.TableName" asp-route-dbName="@Model.DbName">Back</a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateProperty" id="createForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DbName" value="@Model.DbName" />
+            <input type="hidden" asp-for="TableName" value="@Model.TableName" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyType" class="control-label"></label>
+                <select asp-for="PropertyType" class="form-control" asp-items="Html.GetEnumSelectList<PropertyType>()"></select>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

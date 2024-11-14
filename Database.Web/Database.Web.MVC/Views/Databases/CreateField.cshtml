@@ -1,0 +1,73 @@
+﻿@using Database.Common.Models
+﻿
+@model FieldCreateModel
+
+@{
+    ViewData["Title"] = Model.TableName;
+    var types = new Dictionary<PropertyType, string>();
+    types.Add(PropertyType.Integer, "number");
+    types.Add(PropertyType.Real, "number");
+    types.Add(PropertyType.Char, "text");
+    types.Add(PropertyType.String, "text");
+    types.Add(PropertyType.StringInvl, "text");
+}
+
+<h1>@ViewData["Title"]: Add Field</h1>
+<hr />
+<div class="btn-group btn-group-sm" role="group">
+    <input type="submit" form="createForm" value="Create" class="btn btn-outline-dark" />
+    <a class="btn btn-outline-dark" asp-action="Fields" asp-route-tableName="@Model.TableName" asp-route-dbName="@Model.DbName">Back</a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="CreateField" id="createForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DbName" value="@Model.DbName" />
+            <input type="hidden" asp-for="TableName" value="@Model.TableName" />
+            @foreach (var column in Model.Columns)
+            {
+                <div class="form-group">
+                    <label for="@column.Name" class="form-label">@column.Name (@column.Type)</label>
+                    @if (column.Type == PropertyType.Html)
+                    {
+                        <textarea class="form-control" name="@column.Name"></textarea>
+                        @if (ViewData[$"Error_{column.Name}"] is not null)
+                        {
+                            <p class="text-danger">@ViewData[$"Error_{column.Name}"]</p>
+                        }
+                    }
+                    else if (column.Type == PropertyType.StringInvl)
+                    {
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="@column.Name">Min:</span>
+                            </div>
+                            <input type="@types[column.Type]" name="@column.Name" value="@Model.Values[@column.Name].Min" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="@column.Name">Max:</span>
+                            </div>
+                            <input type="@types[column.Type]" name="@column.Name" value="@Model.Values[@column.Name].Max" class="form-control" />
+                        </div>
+                    </div>
+                    @if (ViewData[$"Error_{column.Name}"] is not null)
+                    {
+                        <p class="text-danger">@ViewData[$"Error_{column.Name}"]</p>
+                    }
+                </div>
+                    }
+                    else
+                    {
+                    <input type="@types[column.Type]" @(column.Type == PropertyType.Real ? "step=any" : "") @(column.Type == PropertyType.Char ? "maxlength=1" : "") name="@column.Name" value="@Model.Values[@column.Name]" class="form-control" />
+                    }
+                </div>
+            }
+        </form>
+    </div>
+</div>
